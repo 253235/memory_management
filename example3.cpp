@@ -10,6 +10,12 @@ void validateArguments(int argc)
     }
 }
 
+class custom_error : public std::logic_error
+{
+public:
+  custom_error(std::string msg) : logic_error(msg){}
+};
+
 class Resource
 {
 public:
@@ -18,7 +24,7 @@ public:
         std::cout << "Using resource. Passed " << *arg << std::endl;
         if (*arg == 'd')
         {
-            throw std::logic_error("Passed d. d is prohibited.");
+            throw custom_error("Passed d. d is prohibited.");
         }
     }
 };
@@ -36,7 +42,7 @@ int main(int argc, char* argv[])
         rsc->use(argument);
         delete rsc;
     }
-    catch (std::logic_error& e)
+    catch (custom_error& e)
     {
         std::cout << e.what() << std::endl;
     }
