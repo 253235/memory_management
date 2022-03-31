@@ -40,12 +40,12 @@ int main(int argc, char* argv[])
     {
         rsc = new Resource();
         rsc->use(argument);
-        delete rsc;
     }
     catch (custom_error& e)
     {
         std::cout << e.what() << std::endl;
     }
+    delete rsc;
     return 0;
 }
 
